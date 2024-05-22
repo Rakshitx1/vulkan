@@ -20,13 +20,12 @@ fi
 
 # Remove existing build directory if it exists
 if [ -d "build" ]; then
+    echo -e "\e[1;33mRemoving existing build directory...\e[0m"
     rm -rf build
 fi
 
 # Create a new build directory
 mkdir -p build
-
-# Navigate to the build directory
 cd build
 
 # Generate Makefiles and build the project with the specified build type
@@ -36,11 +35,7 @@ cmake -DCMAKE_BUILD_TYPE="$BUILD_TYPE" ..
 make
 
 # Run the executable
-if [ "$BUILD_TYPE" == "Release" ]; then
-    ./Release/VulkanTest
-else
-    ./Debug/VulkanTest
-fi
+./$BUILD_TYPE/VulkanTest
 
 # Return to the initial directory
 cd "$CURRENT_DIR"
